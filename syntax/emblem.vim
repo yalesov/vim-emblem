@@ -37,27 +37,27 @@ hi def link eblInlineText eblRaw
 
 syn cluster eblHbsComponent contains=eblHbsArg,eblhbsAttr,eblHbsTextOp,eblLineOp
 
-syn match eblHbsOp            '\v\s*\=+'                                                           nextgroup=eblHbsHelper     skipwhite contained display
-syn match eblHbsHelper        '\v(\w|-)+'                             contains=eblKnownBlockHelper nextgroup=@eblHbsComponent skipwhite contained display
-syn match eblHbsTextOp        '|'                                                                  nextgroup=eblHbsText                 contained display
-syn match eblHbsText          '.*'                                                                                                      contained display
-syn match eblKnownBlockHelper '\v<(if|unless|else|each|with|view)>'                                                                     contained display
-hi def link eblHbsOp             eblOperator
-hi def link eblHbsHelper         eblFunction
-hi def link eblHbsTextOp         eblOperator
-hi def link eblHbsText           eblRaw
-hi def link eblKnownBlockHelper  eblKeyword
+syn match eblHbsOp            '\v\s*\=+'                                                         nextgroup=eblHbsHelper     skipwhite contained display
+syn match eblHbsHelper        '\v(\w|-)+'                             contains=eblCtrlFlowHelper nextgroup=@eblHbsComponent skipwhite contained display
+syn match eblHbsTextOp        '|'                                                                nextgroup=eblHbsText                 contained display
+syn match eblHbsText          '.*'                                                                                                    contained display
+syn match eblCtrlFlowHelper   '\v<(if|unless|else|each|with)>'                                                                        contained display
+hi def link eblHbsOp          eblOperator
+hi def link eblHbsHelper      eblFunction
+hi def link eblHbsTextOp      eblOperator
+hi def link eblHbsText        eblRaw
+hi def link eblCtrlFlowHelper eblKeyword
 
-syn match eblHbsArg           '\v\s*((["'])[^\2]{-}\2|(\w|\.|-|\>)+)'                              nextgroup=@eblHbsComponent skipwhite contained display
-syn match eblHbsAttr          '\v\s*(\w|-)+\=@='                      contains=eblHbsAttrBind      nextgroup=eblHbsAttrOp               contained display
-syn match eblHbsAttrBind      /\v<(\w|-)+Bind>/                                                                                         contained display
-syn match eblHbsAttrOp        '='                                                                  nextgroup=eblHbsAttrLit              contained display
-syn match eblHbsAttrLit       /\v(["'])[^\1]{-}\1|[^: ]+/             contains=eblItpl             nextgroup=@eblHbsComponent skipwhite contained display
-hi def link eblHbsArg            eblLiteral
-hi def link eblHbsAttr           eblAttr
-hi def link eblhbsAttrBind       eblBind
-hi def link eblHbsAttrOp         eblOperator
-hi def link eblHbsAttrLit        eblLiteral
+syn match eblHbsArg           '\v\s*((["'])[^\2]{-}\2|(\w|\.|-|\>)+)'                            nextgroup=@eblHbsComponent skipwhite contained display
+syn match eblHbsAttr          '\v\s*(\w|-)+\=@='                      contains=eblHbsAttrBind    nextgroup=eblHbsAttrOp               contained display
+syn match eblHbsAttrBind      /\v<(\w|-)+Bind>/                                                                                       contained display
+syn match eblHbsAttrOp        '='                                                                nextgroup=eblHbsAttrLit              contained display
+syn match eblHbsAttrLit       /\v(["'])[^\1]{-}\1|[^: ]+/             contains=eblItpl           nextgroup=@eblHbsComponent skipwhite contained display
+hi def link eblHbsArg         eblLiteral
+hi def link eblHbsAttr        eblAttr
+hi def link eblhbsAttrBind    eblBind
+hi def link eblHbsAttrOp      eblOperator
+hi def link eblHbsAttrLit     eblLiteral
 
 syn cluster eblAttrComponent contains=eblAttr,eblInlineText,eblLineOp
 
