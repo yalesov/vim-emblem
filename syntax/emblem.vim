@@ -18,7 +18,7 @@ syn match eblLineStart '^\s*' nextgroup=@eblStartElements                     di
 syn match eblLineOp    '\s*:' nextgroup=@eblStartElements skipwhite contained display
 hi def link eblLineOp eblOperator
 
-syn cluster eblStartElements contains=eblIdOp,eblClassOp,eblHbsOp,eblHbsHelper,eblHbsPartialOp,eblView,@eblTag
+syn cluster eblStartElements contains=eblIdOp,eblClassOp,eblHbsOp,eblHbsHelper,eblHbsPartialOp,eblView,@eblTag,eblComment,eblText
 
 syn cluster eblComponent     contains=eblIdOp,eblClassOp,eblInlineText,eblAttr,eblHbsOp,eblHbsAttrRegion,eblHbsPartialOp,eblLineOp
 
@@ -118,9 +118,9 @@ syn match eblCustomTag '%[a-z][a-z0-9-]*' nextgroup=@eblComponent contained disp
 hi def link eblKnownTag  eblTag
 hi def link eblCustomTag eblTag
 
-syn match eblText    '\v^(\s*)[|'].*(\n\1\s.*)*' contains=eblTextOp,eblItpl
-syn match eblTextOp  '\v^(\s*)[|']'                                         contained display
-syn match eblComment '\v^(\s*)/.*(\n\1\s.*)*'
+syn match eblTextOp '\v^(\s*)[|']' contained display
+syn region eblText    start='\v^\z(\s*)[|']' end='\v^(\z1 )@!' contains=eblTextOp,eblItpl
+syn region eblComment start='\v^\z(\s*)/'    end='\v^(\z1 )@!'
 hi def link eblText   eblRaw
 hi def link eblTextOp eblOperator
 
