@@ -12,5 +12,5 @@ setlocal smarttab
 setlocal expandtab
 setlocal smartindent
 
-setlocal formatoptions-=t formatoptions+=croql
+setlocal formatoptions=q
 setlocal comments=:/
