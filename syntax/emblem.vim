@@ -18,7 +18,7 @@ syn match eblLineStart '^\s*' nextgroup=@eblStartElements                     di
 syn match eblLineOp    '\s*:' nextgroup=@eblStartElements skipwhite contained display
 hi def link eblLineOp eblOperator
 
-syn cluster eblStartElements contains=eblIdOp,eblClassOp,eblHbsOp,eblHbsHelper,eblHbsPartialOp,eblView,@eblTag,eblComment,eblText
+syn cluster eblStartElements contains=eblIdOp,eblClassOp,eblHbsOp,@eblHbsHelpers,eblHbsPartialOp,eblView,@eblTag,eblComment,eblText
 
 syn cluster eblComponent     contains=eblIdOp,eblClassOp,eblInlineText,eblAttr,eblHbsOp,eblHbsAttrRegion,eblHbsPartialOp,eblLineOp
 
@@ -29,35 +29,46 @@ syn match eblClass   '\v(\w|-)+' nextgroup=@eblComponent contained display
 hi def link eblIdOp    eblId
 hi def link eblClassOp eblClass
 
-syn region eblHbsAttrRegion matchgroup=eblHbsAttrRegionOp start='{' end='}' contains=eblHbsHelper nextgroup=@eblComponent keepend contained display
+syn region eblHbsAttrRegion matchgroup=eblHbsAttrRegionOp start='{' end='}' contains=@eblHbsHelpers nextgroup=@eblComponent keepend contained display
 hi def link eblHbsAttrRegionOp eblOperator
 
 syn match eblInlineText '\v\s+[^:]+.*$' contains=eblItpl contained display
 hi def link eblInlineText eblRaw
 
-syn cluster eblHbsComponent contains=eblHbsArg,eblhbsAttr,eblHbsTextOp,eblLineOp
+syn cluster eblHbsComponent contains=eblHbsArg,eblHbsAttr,eblHbsTextOp,eblLineOp
 
-syn match eblHbsOp            '\v\s*\=+'                                                         nextgroup=eblHbsHelper     skipwhite contained display
-syn match eblHbsHelper        '\v\w(\w|-|\.)*'                        contains=eblCtrlFlowHelper nextgroup=@eblHbsComponent skipwhite contained display
-syn match eblHbsTextOp        '|'                                                                nextgroup=eblHbsText                 contained display
-syn match eblHbsText          '.*'                                                                                                    contained display
-syn match eblCtrlFlowHelper   '\v<(if|unless|else|each|with)>'                                                                        contained display
-hi def link eblHbsOp          eblOperator
-hi def link eblHbsHelper      eblFunction
-hi def link eblHbsTextOp      eblOperator
-hi def link eblHbsText        eblRaw
-hi def link eblCtrlFlowHelper eblKeyword
+syn match eblHbsOp             '\v\s*\=+'                                                      nextgroup=@eblHbsHelpers     skipwhite contained display
+syn match eblHbsHelper         '\v\w(\w|-|\.)*'                                                nextgroup=@eblHbsComponent   skipwhite contained display
+syn match eblHbsTextOp         '|'                                                             nextgroup=eblHbsText                   contained display
+syn match eblHbsText           '.*'                                                                                                   contained display
+hi def link eblHbsOp             eblOperator
+hi def link eblHbsHelper         eblFunction
+hi def link eblHbsTextOp         eblOperator
+hi def link eblHbsText           eblRaw
 
-syn match eblHbsArg           '\v\s*((["'])[^\2]{-}\2|(\w|\.|-|\>)+)'                            nextgroup=@eblHbsComponent skipwhite contained display
-syn match eblHbsAttr          '\v\s*(\w|-)+\=@='                      contains=eblHbsAttrBind    nextgroup=eblHbsAttrOp               contained display
-syn match eblHbsAttrBind      /\v<(\w|-)+Bind>/                                                                                       contained display
-syn match eblHbsAttrOp        '='                                                                nextgroup=eblHbsAttrLit              contained display
-syn match eblHbsAttrLit       /\v(["'])[^\1]{-}\1|[^: ]+/             contains=eblItpl           nextgroup=@eblHbsComponent skipwhite contained display
-hi def link eblHbsArg         eblLiteral
-hi def link eblHbsAttr        eblAttr
-hi def link eblhbsAttrBind    eblBind
-hi def link eblHbsAttrOp      eblOperator
-hi def link eblHbsAttrLit     eblLiteral
+syn cluster eblHbsHelpers contains=eblHbsHelper,eblHbsCtrlFlowHelper,eblHbsEachHelper
+
+syn match eblHbsCtrlFlowHelper '\v<(if|unless|else|with)>'                                     nextgroup=@eblHbsComponent   skipwhite contained display
+syn match eblHbsEachHelper     '\v<each>'                                                      nextgroup=eblHbsEachArg      skipwhite contained display
+syn match eblHbsEachArg        /\v((["'])[^\2]{-}\2|(\w|\.|-|\>)+)/                            nextgroup=eblHbsIn,eblLineOp skipwhite contained display
+syn match eblHbsIn             '\v<in>'                                                        nextgroup=eblHbsInArg        skipwhite contained display
+syn match eblHbsInArg          /\v((["'])[^\2]{-}\2|(\w|\.|-|\>)+)/                            nextgroup=eblLineOp          skipwhite contained display
+hi def link eblHbsCtrlFlowHelper eblKeyword
+hi def link eblHbsEachHelper     eblKeyword
+hi def link eblHbsEachArg        eblLiteral
+hi def link eblHbsIn             eblKeyword
+hi def link eblHbsInArg          eblLiteral
+
+syn match eblHbsArg            /\v\s*((["'])[^\2]{-}\2|(\w|\.|-|\>)+)/                         nextgroup=@eblHbsComponent   skipwhite contained display
+syn match eblHbsAttr           '\v\s*(\w|-)+\=@='                      contains=eblHbsAttrBind nextgroup=eblHbsAttrOp                 contained display
+syn match eblHbsAttrBind       /\v<(\w|-)+Bind>/                                                                                      contained display
+syn match eblHbsAttrOp         '='                                                             nextgroup=eblHbsAttrLit                contained display
+syn match eblHbsAttrLit        /\v(["'])[^\1]{-}\1|[^: ]+/             contains=eblItpl        nextgroup=@eblHbsComponent   skipwhite contained display
+hi def link eblHbsArg            eblLiteral
+hi def link eblHbsAttr           eblAttr
+hi def link eblhbsAttrBind       eblBind
+hi def link eblHbsAttrOp         eblOperator
+hi def link eblHbsAttrLit        eblLiteral
 
 syn cluster eblAttrComponent contains=eblAttr,eblInlineText,eblLineOp
 
@@ -91,11 +102,11 @@ hi def link eblAttrRegionClassLit   eblLiteral
 syn match eblKnownEvent '\v\s*<(touchStart|touchMove|touchEnd|touchCancel|keyDown|keyUp|keyPress|mouseDown|mouseUp|contextMenu|click|doubleClick|mouseMove|focusIn|focusOut|mouseEnter|mouseLeave|submit|input|change|dragStart|drag|dragEnter|dragLeave|dragOver|drop|dragEnd)>' contained display
 hi def link eblKnownEvent eblEvent
 
-syn region eblItpl matchgroup=eblItplOp start='#{' end='}'  contains=eblHbsHelper,eblHbsPartialOp keepend contained display
-syn region eblItpl matchgroup=eblItplOp start='{{' end='}}' contains=eblHbsHelper,eblHbsPartialOp keepend contained display
+syn region eblItpl matchgroup=eblItplOp start='#{' end='}'  contains=@eblHbsHelpers,eblHbsPartialOp keepend contained display
+syn region eblItpl matchgroup=eblItplOp start='{{' end='}}' contains=@eblHbsHelpers,eblHbsPartialOp keepend contained display
 hi def link eblItplOp eblOperator
 
-syn match eblHbsPartialOp '\s*>' nextgroup=eblHbsHelper skipwhite contained display
+syn match eblHbsPartialOp '\s*>' nextgroup=@eblHbsHelpers skipwhite contained display
 hi def link eblhbsPartialOp eblOperator
 
 syn match eblView        '\v[A-Z](\w|\.)*' nextgroup=@eblViewComponent skipwhite contained display
