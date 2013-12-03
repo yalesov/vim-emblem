@@ -14,3 +14,4 @@ setlocal smartindent
 
 setlocal formatoptions=q
 setlocal comments=:/
+setlocal commentstring=/\ %s
