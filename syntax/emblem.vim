@@ -48,7 +48,7 @@ hi def link eblHbsText           eblRaw
 
 syn cluster eblHbsHelpers contains=eblHbsHelper,eblHbsCtrlFlowHelper,eblHbsEachHelper
 
-syn match eblHbsCtrlFlowHelper   '\v<(if|unless|else|with)>'                                     nextgroup=@eblHbsComponent                           skipwhite contained display
+syn match eblHbsCtrlFlowHelper   '\v<(else if|if|unless|else|with)>'                             nextgroup=@eblHbsComponent                           skipwhite contained display
 syn match eblHbsEachHelper       '\v<each>'                                                      nextgroup=eblHbsEachArg                              skipwhite contained display
 syn match eblHbsEachArg          /\v((["'])[^\2]{-}\2|(\w|\.|-|\>)+)/                            nextgroup=eblHbsAs                                   skipwhite contained display
 syn match eblHbsAs               '\v<as>'                                                        nextgroup=eblHbsAsBlockStartArg                      skipwhite contained display
