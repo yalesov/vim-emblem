@@ -110,6 +110,7 @@ hi def link eblKnownEvent eblEvent
 
 syn region eblItpl matchgroup=eblItplOp start='#{' end='}'  contains=@eblHbsHelpers,eblHbsPartialOp keepend contained display
 syn region eblItpl matchgroup=eblItplOp start='{{' end='}}' contains=@eblHbsHelpers,eblHbsPartialOp keepend contained display
+syn region eblItpl matchgroup=eblItplOp start='(' end=')'   contains=@eblHbsHelpers,eblHbsPartialOp keepend contained display
 hi def link eblItplOp eblOperator
 
 syn match eblHbsPartialOp '\s*>' nextgroup=@eblHbsHelpers skipwhite contained display
