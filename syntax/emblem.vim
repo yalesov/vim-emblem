@@ -38,7 +38,7 @@ hi def link eblInlineText eblRaw
 syn cluster eblHbsComponent contains=eblHbsArg,eblHbsAttr,eblHbsTextOp,eblLineOp
 
 syn match eblHbsOp             '\v\s*\=+'                                                      nextgroup=@eblHbsHelpers     skipwhite contained display
-syn match eblHbsHelper         '\v\w(\w|-|\.)*'                                                nextgroup=@eblHbsComponent   skipwhite contained display
+syn match eblHbsHelper         '\v\w(\w|-|\.|\/)*'                                             nextgroup=@eblHbsComponent   skipwhite contained display
 syn match eblHbsTextOp         '|'                                                             nextgroup=eblHbsText                   contained display
 syn match eblHbsText           '.*'                                                                                                   contained display
 hi def link eblHbsOp             eblOperator
