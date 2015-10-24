@@ -8,6 +8,8 @@ Features:
 * sets standard coding style (two-space indentation)
 * syntax highlighting
 
+This plugin contributes to [vim-polyglot](https://github.com/sheerun/vim-polyglot) language pack.
+
 Todo:
 
 * indentation
