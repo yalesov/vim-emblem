@@ -4,7 +4,7 @@
 
 Features:
 
-* detects `*.em` files as `emblem`
+* detects `*.em` and `.emblem` files as `emblem`
 * sets standard coding style (two-space indentation)
 * syntax highlighting
 
