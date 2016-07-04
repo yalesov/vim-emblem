@@ -21,7 +21,7 @@ Get [vundle](https://github.com/gmarik/vundle).
 `.vimrc`:
 
 ```vim
-Bundle 'heartsentwined/vim-emblem'
+Bundle 'yalesov/vim-emblem'
 ```
 
 Launch vim, `:BundleInstall`.
@@ -32,12 +32,12 @@ Get [pathogen.vim](https://github.com/tpope/vim-pathogen).
 
 ```sh
 $ cd ~/.vim/bundle
-$ git clone https://github.com/heartsentwined/vim-emblem.git
+$ git clone https://github.com/yalesov/vim-emblem.git
 ```
 
 ## Manual install
 
-[Download](https://github.com/heartsentwined/vim-emblem/tags) and
+[Download](https://github.com/yalesov/vim-emblem/tags) and
 extract all scripts into `~/.vim` / `$HOME\vimfiles`.
 
 # License
