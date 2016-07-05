@@ -50,8 +50,11 @@ syn cluster eblHbsHelpers contains=eblHbsHelper,eblHbsCtrlFlowHelper,eblHbsEachH
 
 syn match eblHbsCtrlFlowHelper   '\v<(else if|if|unless|else)>'                                  nextgroup=@eblHbsComponent                           skipwhite contained display
 syn match eblHbsEachHelper       '\v<each>'                                                      nextgroup=eblHbsEachArg                              skipwhite contained display
-syn match eblHbsWithHelper       '\v<with>'                                                      nextgroup=eblHbsEachArg                              skipwhite contained display "Allows for |item index|, which is wrong
-syn match eblHbsEachArg          /\v((["'])[^\2]{-}\2|(\w|\.|-|\>)+)/                            nextgroup=eblHbsAs                                   skipwhite contained display
+syn match eblHbsEachArg          /\v((["'])[^\2]{-}\2|(\w|\.|-|\>)+)/                            nextgroup=eblHbsIn,eblLineOp                         skipwhite contained display
+syn match eblHbsIn               '\v<in>'                                                        nextgroup=eblHbsInArg                                skipwhite contained display
+syn match eblHbsInArg            /\v((["'])[^\2]{-}\2|(\w|\.|-|\>)+)/                            nextgroup=eblLineOp                                  skipwhite contained display
+syn match eblHbsWithHelper       '\v<with>'                                                      nextgroup=eblHbsWithArg                              skipwhite contained display
+syn match eblHbsWithArg          /\v((["'])[^\2]{-}\2|(\w|\.|-|\>)+)/                            nextgroup=eblHbsAs                                   skipwhite contained display
 syn match eblHbsAs               '\v<as>'                                                        nextgroup=eblHbsAsBlockStartArg                      skipwhite contained display
 syn match eblHbsAsBlockStartArg  /\v\|/                                                          nextgroup=eblHbsAsBlockFirstArg                      skipwhite contained display
 syn match eblHbsAsBlockFirstArg  /\v((["'])[^\2]{-}\2|(\w|\.|-|\>)+)/                            nextgroup=eblHbsAsBlockSecondArg,eblHbsAsBlockEndArg skipwhite contained display
@@ -59,8 +62,11 @@ syn match eblHbsAsBlockSecondArg /\v((["'])[^\2]{-}\2|(\w|\.|-|\>)+)/           
 syn match eblHbsAsBlockEndArg    /\v\|/                                                          nextgroup=eblLineOp                                  skipwhite contained display
 hi def link eblHbsCtrlFlowHelper   eblKeyword
 hi def link eblHbsEachHelper       eblKeyword
-hi def link eblHbsWithHelper       eblKeyword
 hi def link eblHbsEachArg          eblLiteral
+hi def link eblHbsIn               eblKeyword
+hi def link eblHbsInArg            eblLiteral
+hi def link eblHbsWithHelper       eblKeyword
+hi def link eblHbsWithArg          eblLiteral
 hi def link eblHbsAs               eblKeyword
 hi def link eblHbsAsBlockStartArg  eblOperator
 hi def link eblHbsAsBlockFirstArg  eblLiteral
