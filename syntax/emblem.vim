@@ -29,7 +29,7 @@ syn match eblClass   '\v(\w|-)+' nextgroup=@eblComponent contained display
 hi def link eblIdOp    eblId
 hi def link eblClassOp eblClass
 
-syn region eblHbsAttrRegion matchgroup=eblHbsAttrRegionOp start='{' end='}' contains=@eblHbsHelpers nextgroup=@eblComponent keepend contained display
+syn region eblHbsAttrRegion matchgroup=eblHbsAttrRegionOp start='{\|(\|\[' end='}\|)\|\]' contains=@eblHbsHelpers nextgroup=@eblComponent keepend contained display
 hi def link eblHbsAttrRegionOp eblOperator
 
 syn match eblInlineText '\v\s+[^:]+.*$' contains=eblItpl contained display
