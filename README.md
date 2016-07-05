@@ -4,7 +4,10 @@
 
 Features:
 
-* detects `*.em` and `.emblem` files as `emblem`
+* detects `.em` and `.emblem` files as `emblem`
+  * if [vim-ember-script](https://github.com/yalesov/vim-ember-script)
+    is also included, then `.em` will not clash with ember-script, i.e.
+    `.emblem` = `emblem` and `.em` = `ember-script`
 * sets standard coding style (two-space indentation)
 * syntax highlighting
 
