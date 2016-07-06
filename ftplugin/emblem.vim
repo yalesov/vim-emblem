@@ -3,7 +3,7 @@
 " URL:         http://github.com/yalesov/vim-emblem
 " Version:     2.0.0
 " Last Change: 2016 Jul 5
-" License:     GPL-3.0
+" License:     ISC
 
 setlocal tabstop=2
 setlocal softtabstop=2
